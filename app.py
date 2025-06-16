@@ -61,6 +61,7 @@ if menu == "Homepage":
     - **Status berat badan**
     
     Berdasarkan jenis kelamin, umur, tinggi badan dan berat badan bayi
+                
     ---
     """)
 
@@ -78,7 +79,10 @@ if menu == "Homepage":
 
     Data ini menjadi dasar pelatihan model machine learning yang dapat membantu memprediksi kondisi **gizi buruk** secara dini pada anak balita, sebagai upaya mendukung program pencegahan stunting di Indonesia.
     """)
-
+    st.markdown("""
+    ---
+                
+    """)
     df = pd.read_csv("stunting.csv")
 
     st.markdown("### Distribusi Kategori Stunting")
@@ -117,6 +121,12 @@ if menu == "Homepage":
     st.pyplot(fig6)
 
     st.markdown("""
+    ---
+                
+    ### Evaluasi Model
+    """)
+
+    st.markdown("""
     Hasil evaluasi dari dua model machine learning yang digunakan untuk memprediksi:
     - **Kategori status stunting**: Normal, Stunted, Severely Stunted, dan Tall.
     - **Deskripsi berat badan**: Normal weight, Underweight, Severely Underweight, dan Risk of Overweight.
@@ -150,7 +160,7 @@ elif menu == "Prediksi Stunting":
     st.title("📋 Form Prediksi Stunting")
 
     jenis_kelamin = st.selectbox("Jenis Kelamin", ["Laki-laki", "Perempuan"])
-    umur = st.number_input("Umur (bulan)", min_value=0, max_value=60)
+    umur = st.number_input("Umur (0-60 bulan)", min_value=0, max_value=60)
     tinggi = st.number_input("Tinggi Badan (cm)", min_value=30.0, max_value=130.0)
     berat = st.number_input("Berat Badan (kg)", min_value=2.0, max_value=30.0)
 
