@@ -15,13 +15,13 @@ def load_all():
 def predict_all(input_data):
     model_kategori, model_deskripsi, scaler, label_encoders = load_all()
 
-    # Encode jenis kelamin
+    #encode jenis kelamin
     input_encoded = input_data.copy()
     input_encoded[0] = label_encoders['Jenis Kelamin'].transform([input_data[0]])[0]
 
     scaled = scaler.transform([input_encoded])
 
-    # Prediksi
+    #prediksi
     pred_kategori = model_kategori.predict(scaled)[0]
     pred_deskripsi = model_deskripsi.predict(scaled)[0]
 
