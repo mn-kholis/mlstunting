@@ -75,7 +75,7 @@ if menu == "Homepage":
     - **Tinggi Badan**: Dalam cm  
     - **Berat Badan**: Dalam kg  
     - **Status Stunting**: Kategori seperti `Normal`, `Stunted`, `Severely Stunted`, dan `Tall`  
-    - **Status Wasting (Kategori Berat Badan)**: Deskripsi seperti `Underweight`, `Normal`, `Overweight`, hingga `Risk of Overweight`
+    - **Status Wasting (Kategori Berat Badan)**: Deskripsi seperti `Underweight`, `Normal`, hingga `Risk of Overweight`
 
     Data ini menjadi dasar pelatihan model machine learning yang dapat membantu memprediksi kondisi **gizi buruk** secara dini pada anak balita, sebagai upaya mendukung program pencegahan stunting di Indonesia.
     """)
@@ -237,3 +237,77 @@ elif menu == "Prediksi Stunting":
                 <div class="hasil-value">{ikon_deskripsi} {hasil_deskripsi}</div>
             </div>
         """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("### 💡 Penjelasan Hasil Prediksi")
+
+        # Penjelasan untuk Status Stunting
+        st.subheader("Tentang Status Stunting")
+        if hasil_kategori == "Severely Stunted":
+            st.error(
+                """
+                **Sangat Terhambat (Severely Stunted):**
+                Hasil ini menunjukkan bahwa tinggi badan anak **sangat rendah** untuk usianya. Ini adalah indikasi kuat adanya masalah gizi kronis yang serius.
+                \n\n**Saran:** Sangat disarankan untuk **segera berkonsultasi** dengan dokter anak atau ahli gizi untuk mendapatkan evaluasi dan penanganan lebih lanjut.
+                """
+            )
+        elif hasil_kategori == "Stunted":
+            st.warning(
+                """
+                **Terhambat (Stunted):**
+                Tinggi badan anak berada **di bawah standar** untuk usianya. Ini bisa menjadi tanda kekurangan gizi yang berlangsung lama (kronis).
+                \n\n**Saran:** Sebaiknya konsultasikan dengan tenaga kesehatan (dokter/ahli gizi) untuk memantau pertumbuhan dan mendapatkan saran perbaikan gizi.
+                """
+            )
+        elif hasil_kategori == "Normal":
+            st.success(
+                """
+                **Normal:**
+                Selamat! Tinggi badan anak Anda sesuai dengan standar pertumbuhan untuk usianya.
+                \n\n**Saran:** Terus pertahankan pola makan bergizi seimbang dan pantau pertumbuhannya secara berkala.
+                """
+            )
+        elif hasil_kategori == "Tall":
+            st.info(
+                """
+                **Tinggi (Tall):**
+                Tinggi badan anak Anda berada di atas rata-rata anak seusianya. Umumnya ini bukan masalah kesehatan.
+                \n\n**Saran:** Pastikan anak tetap mendapatkan asupan gizi yang seimbang untuk mendukung pertumbuhannya yang optimal.
+                """
+            )
+
+        # Penjelasan untuk Status Berat Badan
+        st.subheader("Tentang Status Berat Badan")
+
+        if "Severely Underweight" in hasil_deskripsi:
+            st.error(
+                """
+                **Berat Badan Sangat Kurang (Severely Underweight):**
+                Hasil ini menunjukkan bahwa berat badan anak **jauh di bawah standar** normal untuk usianya. Kondisi ini memerlukan perhatian medis **segera**.
+                \n\n**Saran:** Wajib untuk **segera membawa anak ke dokter** atau fasilitas kesehatan terdekat untuk penanganan gizi.
+                """
+            )
+        elif "Underweight" in hasil_deskripsi:
+            st.warning(
+                """
+                **Berat Badan Kurang (Underweight):**
+                Berat badan anak lebih rendah dari rentang yang sehat untuk usianya. Ini menandakan anak mungkin tidak mendapatkan cukup kalori dan nutrisi.
+                \n\n**Saran:** Konsultasikan dengan dokter atau ahli gizi untuk menyusun rencana makan yang tepat.
+                """
+            )
+        elif "Normal" in hasil_deskripsi:
+            st.success(
+                """
+                **Berat Badan Normal (Normal):**
+                Bagus sekali! Berat badan anak berada dalam rentang yang ideal untuk usianya.
+                \n\n**Saran:** Lanjutkan memberikan makanan bergizi seimbang dan lakukan aktivitas fisik yang sesuai.
+                """
+            )
+        elif "Risk of Overweight" in hasil_deskripsi:
+            st.warning(
+                """
+                **Berisiko Berat Badan Lebih (Risk of Overweight):**
+                Ini adalah **kondisi peringatan**. Berat badan anak berada di batas atas rentang normal dan **mendekati** kategori berat badan lebih (overweight).
+                \n\n**Saran:** Perhatikan pola makan anak, kurangi makanan tinggi gula dan lemak, serta dorong untuk lebih aktif bergerak agar berat badannya tidak naik ke kategori overweight.
+                """
+            )
